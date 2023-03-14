@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ECarsData } from 'src/app/interfaces/e-cars-data';
+import { ECarData } from 'src/app/interfaces/e-cars-data';
 import { ECarsService } from 'src/app/services/e-cars.service';
 
 @Component({
@@ -9,10 +9,12 @@ import { ECarsService } from 'src/app/services/e-cars.service';
   styleUrls: ['./e-cars-table.component.css']
 })
 export class ECarsTableComponent {
-  obs : Observable<ECarsData[]> | undefined; 
-  service: ECarsService = new ECarsService();
+  eCars$ : Observable<ECarData[]> | undefined; 
 
-  constructor() {
-    this.obs = this.service.getOb();
+  constructor(private service: ECarsService) {
+    this.eCars$ = this.service.getECars$();
+  }
+  removeECar(id: number){
+    this.service.removeECar(id);
   }
 }
