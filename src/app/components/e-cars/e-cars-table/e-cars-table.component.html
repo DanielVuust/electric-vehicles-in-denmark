@@ -1,0 +1,22 @@
+<table>
+    <tr>
+        <th>Placering</th>
+        <th>Model</th>
+        <th>Antal</th>
+        <th>Ændring Antal (%)</th>
+    </tr>
+    <tr *ngFor="let i of (obs | async)" >
+        <td>
+            {{i.rank}}
+        </td>
+        <td>
+            {{i.model}}
+        </td>
+        <td>
+            {{i.quantity}}
+        </td>
+        <td>
+            {{i.changeQuantityPercent}}
+        </td>
+    </tr>
+</table>
