@@ -4,12 +4,68 @@ tr{
 tr > th{
     color:white;
 }
-.table{
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-}
 .evenRow{
-    background-color:  rgba(255,255,255,0.2);
+    background-color:  rgba(135, 135, 135, 0.356);
+
 }
 .oddRow{
-    background-color:  rgba(255, 255, 255, 0.356);
+    background-color:  rgba(114, 114, 114, 0.2);
+
 }
+.mat-mdc-table{
+    background-color: rgba(228, 7, 7, 0);
+}
+.button{
+    background-color: transparent;
+    border-style: none;
+    text-decoration: underline;
+    height: 100%;
+    width: 100%;
+}
+  
+tr.example-detail-row {
+    height: 0;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):hover {
+    background: whitesmoke;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;
+  }
+  
+  .example-element-row td {
+    border-bottom-width: 0;
+  }
+  
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+  
+  .example-element-diagram {
+    min-width: 80px;
+    border: 2px solid black;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
+  }
+  
+  .example-element-symbol {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: normal;
+  }
+  
+  .example-element-description {
+    padding: 16px;
+  }
+  
+  .example-element-description-attribution {
+    opacity: 0.5;
+  }
+  
+  
+  

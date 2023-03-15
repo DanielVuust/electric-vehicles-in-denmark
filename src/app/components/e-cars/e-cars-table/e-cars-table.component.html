@@ -1,4 +1,8 @@
-<div class="col-10">
+<p></p>
+<p *ngIf="(('test' | morseMd5:'morse') | async) as joke">
+
+</p>
+<!-- <div class="col-10">
 
     <table class="table">
         <tr>
@@ -27,4 +31,61 @@
             </td>
         </tr>
     </table>
+</div> -->
+<div class="col-10">
+    <table mat-table [dataSource]=eCars$ class="mat-elevation-z8" multiTemplateDataRows>
+        <ng-container matColumnDef="rank">
+            <th mat-header-cell *matHeaderCellDef> Rank </th>
+            <td mat-cell *matCellDef="let element"> {{element.rank}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="model">
+            <th mat-header-cell *matHeaderCellDef> Model </th>
+            <td mat-cell *matCellDef="let element"> {{element.model}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> Antal </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="changeQuantityPercent">
+            <th mat-header-cell *matHeaderCellDef> Ændring Antal (%) </th>
+            <td mat-cell *matCellDef="let element"> {{element.changeQuantityPercent}} </td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> Slet </th>
+            <td mat-cell *matCellDef="let element">
+                <button (click)="removeECar(element.id)" class="button">Slet</button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="expandedEdit">
+
+            <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                <!-- <div class="example-element-detail"
+                     [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                     <form [formGroup]="loginData" (ngSubmit) = "onLoginSubmit()">
+ 
+                        <input type="text" name="username" formControlName = "username"> <br>
+                        <input type="password" name="password" formControlName = "password"> <br>
+                        <input type="submit" value="Login">
+                      
+                      </form>
+
+                </div> -->
+            </td>
+          </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+        
+        <tr mat-row *matRowDef="let element; columns: displayedColumns;let even = even"
+        [ngClass]="{ 'evenRow': even, 'oddRow': !even }"
+        class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedEdit']" class="example-detail-row"></tr> 
+    </table>
+        
+
 </div>
