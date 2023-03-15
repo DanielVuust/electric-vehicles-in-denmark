@@ -1,5 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { concatWith, of, Observable } from 'rxjs';
+import { Md5 } from 'ts-md5';
 
 @Pipe({
   name: 'morseMd5'
@@ -7,21 +9,19 @@ import { HttpClient } from '@angular/common/http';
 export class MorseMd5Pipe implements PipeTransform {
 
 constructor(private http: HttpClient) {
-  
 }
-  transform(value: string, arg: string): any {
-    if(arg == "morse"){
-      const headers = { 'content-type': 'application/json',"Access-Control-Allow-Origin" : "*",
-      "Access-Control-Allow-Methods" : "GET,POST,PUT,DELETE,OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"}  
-      console.log("gere");
-      var i =  this.http.get("https://api.funtranslations.com/translate/morse.json?text=test",{'headers':headers});
-      
-      console.log("gere2");
-      
-      console.log(i);
-      return i; 
+    transform(value: string, arg: string): Observable<any> | null {
+     if(arg == "morse"){
+      //NOTE: not the best way to do this but ey its an pipe. 
+      const headers = { 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}  
+      return this.http.get("https://api.funtranslations.com/translate/morse.json?text=" + value, { 'headers': headers });
+       
     }
+    else if(arg == "md5"){
+      const md5 = new Md5();
+      return of(md5.appendStr(value).end());
+    }
+    return null;
   }
 
 }

@@ -18,6 +18,7 @@ import { ECarsService } from 'src/app/services/e-cars.service';
   ],
 })
 export class ECarsTableComponent {
+  input: string = "";
   eCars$ : Observable<ECarData[]>; 
   displayedColumns: string[] = ['rank', 'model', 'quantity', 'changeQuantityPercent', 'delete'];
   displayedColumnsForEdit: string[] = ['rank', 'editModel', 'editQuantity', 'editChangeQuantityPercent', 'save'];
