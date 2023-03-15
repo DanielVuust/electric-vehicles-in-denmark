@@ -49,7 +49,6 @@ constructor() {
   }
 
   addECar(t: ECarData){
-  console.log(t);
     this.eCarsTop25_2022.push(t);
     this.reorderCars();
     this.notifySubscribers();
@@ -57,9 +56,16 @@ constructor() {
   removeECar(id: number){
     this.eCarsTop25_2022 = this.eCarsTop25_2022.filter(x => x.id != id);
     this.reorderCars();
+
     this.notifySubscribers();
   }
-  //Note: This 
+  updateECar(newECar: ECarData){
+    this.removeECar(newECar.id);
+    this.eCarsTop25_2022.push(newECar);
+    this.reorderCars();
+    this.notifySubscribers();
+  }
+  //Note: This is just for fun :)
   simulateLiveUpdates(){
     setInterval(() =>
     this.incrementRandomCarSoldCount(), 100
@@ -67,15 +73,16 @@ constructor() {
   }
   private incrementRandomCarSoldCount(){
     this.eCarsTop25_2022[Math.floor(Math.random() * this.eCarsTop25_2022.length)].quantity++; 
+    
     this.notifySubscribers();
   }
   private reorderCars(){
     this.eCarsTop25_2022 = this.eCarsTop25_2022.sort((n1,n2) => {
       if (n1.quantity > n2.quantity) {
-          return 1;
+          return -1;
       }
       if (n1.quantity < n2.quantity) {
-          return -1;
+          return 1;
       }
       return 0;
   });

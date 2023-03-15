@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { concatWith, of, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { of, Observable } from 'rxjs';
 import { Md5 } from 'ts-md5';
 
 @Pipe({

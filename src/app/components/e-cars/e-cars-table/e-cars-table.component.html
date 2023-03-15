@@ -65,17 +65,27 @@
         </ng-container>
         <ng-container matColumnDef="expandedEdit">
 
-            <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-                <div class="example-element-detail"
-                     [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                     <form [formGroup]="loginData" (ngSubmit) = "onLoginSubmit()">
- 
-                        <input type="text" name="username" formControlName = "username"> 
-                        <input type="password" name="password" formControlName = "password"> 
-                        <input type="submit" value="Login">
-                      
-                      </form>
+            <td mat-cell *matCellDef="let element; let i = index" [attr.colspan]="displayedColumns.length">
+                <div class="example-element-detail">
+                    <form [formGroup]=getECarForm(element) (ngSubmit) = "onSubmit(element.id)">
+                        
+                        <mat-form-field class="p-2"> 
+                            <mat-label>Model</mat-label>
+                            <input matInput type="text" name="username" formControlName = "carModel" required>
 
+                        </mat-form-field>
+                        <mat-form-field class="p-2"> 
+                            <mat-label>Antal</mat-label>
+                            <input matInput type="number" name="password" min="0" formControlName = "carSoldCount" required>
+
+                        </mat-form-field>
+                        <mat-form-field class="p-2"> 
+                            <mat-label>Ændring Antal (%)</mat-label>
+                            <input matInput type="text" name="change" formControlName = "carSoldChangePercentage" required>
+                        </mat-form-field>
+                        <input type="submit" value="Login" class="p-2">
+                      
+                    </form>
                 </div>
             </td>
           </ng-container>
@@ -88,7 +98,7 @@
         [class.example-expanded-row]="expandedElement === element"
         (click)="expandedElement = expandedElement === element ? null : element">
     </tr>
-    <tr mat-row *matRowDef="let row; columns: ['expandedEdit']" class="example-detail-row"></tr> 
+    <tr mat-row *matRowDef="let row; columns: ['expandedEdit']" class="example-detail-row" [@detailExpand]="row == expandedElement ? 'expanded' : 'collapsed'"></tr> 
     </table>
         
 
